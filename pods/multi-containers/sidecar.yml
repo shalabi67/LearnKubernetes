@@ -1,0 +1,28 @@
+# sidecars are uses to support non functional requirements like monitoring and logging
+kind: Pod
+apiVersion: v1
+metadata:
+  name: sidecar-pod
+  labels:
+    app: sidecar
+spec:
+  # we need to provide a shared volume which wil be used by containers
+  volumes:
+    - name: logs
+      emptyDir: {}
+  containers:
+    - name: app
+      image: busybox
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do date >> /var/log/date.txt; sleep 10;done"]  # notice the use of /var/log
+      volumeMounts:  # use shared logging volume
+        - name: logs
+          mountPath: /var/log
+
+    - name: sidecar
+      image: centos/httpd
+      ports:
+        - containerPort: 80
+      volumeMounts: # use shared logging volume
+        - name: logs
+          mountPath: /var/www/html

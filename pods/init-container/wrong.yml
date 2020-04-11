@@ -1,0 +1,15 @@
+# in this example we wikll show what will happen if init container will not finish
+# and how is that will prevent the main container from starting.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-container-will-not-finish
+  labels:
+    app: init-container-will-not-finish
+spec:
+  initContainers:
+    - name: web-init-container
+      image: httpd  # this is a web app and it will not complete which will bloch the container from running
+  containers: # will not run
+    - name: main-container-will-not-run
+      image: alpine

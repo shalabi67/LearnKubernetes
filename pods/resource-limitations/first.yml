@@ -1,0 +1,28 @@
+# Example shows how to limit resource usage.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+spec:
+  containers:
+    - name: db
+      image: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+      resources:
+        requests:
+          memory: "64Mi"  # 64 MB
+          cpu: "250m"  # .25 core 1/4 cpu core
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+    - name: wp
+      image: wordpress
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"

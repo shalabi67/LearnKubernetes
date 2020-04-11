@@ -1,0 +1,15 @@
+# example shows how to create n jobs doing the same thing
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multi-job
+spec:
+  completions: 5   # notice that this will create 5 pods
+  template:
+    spec:
+      containers:
+        - name: sleepy
+          image: alpine
+          command: [ "/bin/sleep" ]
+          args: [ "5" ]
+      restartPolicy: Never

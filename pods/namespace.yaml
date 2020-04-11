@@ -1,0 +1,16 @@
+# This shows how to create a pod on a specific namespace
+
+# before you run this file you need to run the command
+# kubectl create ns testing
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox2
+  namespace: testing
+spec:
+  containers:
+    - image: busybox
+      name: busy
+      command:
+        - sleep
+        - "3600"

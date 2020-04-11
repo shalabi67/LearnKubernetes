@@ -1,0 +1,16 @@
+# in this example we will show how main-container will start after the innit container finishes.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-init-container-example
+  labels:
+    app: valid-init-container-example
+spec:
+  initContainers:
+    - name: sleepy-init-container
+      image: alpine
+      command: ['sleep', '20'] # sleep for 20 seconds
+  containers: # will not run
+    - name: main-container
+      image: nginx

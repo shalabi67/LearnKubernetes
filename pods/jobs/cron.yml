@@ -1,0 +1,19 @@
+# Example of crone job which will run every 2 min
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello-cron-job
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hello
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - date; echo hello from the K8s cluster
+          restartPolicy: OnFailure
