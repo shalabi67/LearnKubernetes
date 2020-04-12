@@ -1,0 +1,23 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-cm
+  labels:
+    role: web
+spec:
+  containers:
+    - name: nginx-cm
+      image: nginx
+      volumeMounts:
+        - name: conf  # this is the config map volume
+          mountPath: /etc/nginx/conf.d
+
+  # create a volume from config map
+  volumes:
+    - name: conf
+      configMap:
+        name: nginy-server-config
+        items:
+          - key: serverConfig.txt
+            path: default.conf

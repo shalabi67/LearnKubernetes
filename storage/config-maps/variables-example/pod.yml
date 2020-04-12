@@ -1,0 +1,13 @@
+# create as pod using environment variables
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-pod
+spec:
+  containers:
+    - name: use-environment
+      image: cirros
+      command: ["/bin/sh", "-c", "env"]
+      envFrom:
+        - configMapRef:
+            name: variables
