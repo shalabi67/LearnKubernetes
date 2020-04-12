@@ -1,0 +1,12 @@
+# Example of Persistent Volume Claim
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pv-claim
+spec:
+  storageClassName: manual
+  accessModes:  # This should be the same as the one set at the Persistent Volume
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

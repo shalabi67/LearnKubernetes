@@ -1,0 +1,26 @@
+# example shows how to create a volume and use it between containers
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-example
+spec:
+  containers:
+    - name: centos1
+      image: centos:7
+      command:
+        - sleep
+        - "3600"
+      volumeMounts:
+        - mountPath: /centos1 # this is the path to volume in the container
+          name: test  # this is the volume name define in volumes.
+    - name: centos2
+      image: centos:7
+      command:
+        - sleep
+        - "3600"
+      volumeMounts:
+        - mountPath: /centos2
+          name: test
+  volumes:  # this is the volume the will be used by containers in the pod
+    - name: test
+      emptyDir: {}
