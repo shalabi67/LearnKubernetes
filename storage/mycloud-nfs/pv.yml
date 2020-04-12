@@ -1,0 +1,16 @@
+# example to create a pv on mycloud using nfs
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mycloud-pv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  #persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /nfs/kubernetes
+    server: 192.168.178.30
+    readOnly: false

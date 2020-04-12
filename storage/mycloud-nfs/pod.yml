@@ -1,0 +1,22 @@
+# example pod that uses the PV and PVC
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mycloud-pod
+spec:
+  # identify the pod volume and this will be persistence since it is using pvc
+  volumes:
+    - name: pv-storage
+      persistentVolumeClaim:
+        claimName: mycloud-claim
+
+  # create container and set it to the volume
+  containers:
+    - name: pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"  # this is the path to nginx home directory
+          name: pv-storage   # link to volume defined in volumes
