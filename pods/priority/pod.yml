@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: high-priority-pod
+
+spec:
+  containers:
+    - name: busy
+      image: busybox
+      command:
+        - sleep
+        - "3600"
+
+  # The priority class to use with this Pod, as defined in PriorityClass resource
+  priorityClassName: high-priority
+

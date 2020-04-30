@@ -1,0 +1,27 @@
+# this example shows how to use tcpSocket and it uses two probes
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-probes
+  labels:
+    role: web
+spec:
+  containers:
+    - name: nginx-probes
+      image: nginx
+
+      # probe 1: check if the port ready
+      readinessProbe:
+        tcpSocket:
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 10
+
+      # probe 2: check if the port available
+      livenessProbe:
+        tcpSocket:
+          port: 80
+        initialDelaySeconds: 20
+        periodSeconds: 20
+

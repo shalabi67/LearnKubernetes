@@ -1,0 +1,22 @@
+# shows how to use probe
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-ready
+  namespace: default
+spec:
+  containers:
+    - name: busy
+      image: busybox
+      command:
+        - sleep
+        - "3600"
+
+      # probe: which check file /tmp/nothing every 10 seconds
+      readinessProbe:
+        periodSeconds: 10
+        exec:
+          command:
+            - cat
+            - /tmp/nothing
+      resources: {}

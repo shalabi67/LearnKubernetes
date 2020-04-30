@@ -1,0 +1,30 @@
+# This manifest of an NGINX deployment has four replicas and the selector label app=frontend.
+# The deployment has a PodAntiAffinity stanza configured that will ensure that the scheduler does not colocate replicas on a single node.
+#  This ensures that if a node fails, there are still enough replicas of NGINX to serve data from its cache.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-anti-affinity
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - frontend
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: nginx
+          image: nginx:alpine

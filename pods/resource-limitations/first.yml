@@ -11,9 +11,12 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: "password"
       resources:
+        # Initial resource request for CPU and memory
         requests:
           memory: "64Mi"  # 64 MB
           cpu: "250m"  # .25 core 1/4 cpu core
+
+        # Upper limit until we want our application to grow at max
         limits:
           memory: "128Mi"
           cpu: "500m"

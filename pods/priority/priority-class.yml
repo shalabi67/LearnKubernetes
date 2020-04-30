@@ -1,0 +1,10 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  # The name of the priority class object
+  name: high-priority
+
+# The priority value of the object
+value: 1000
+globalDefault: false
+description: This is a very high priority Pod class
