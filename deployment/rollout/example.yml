@@ -8,8 +8,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 1
+      maxSurge: 2    # during update we can have extra two pods, which means we can have 6 pods while we are updating.
+      maxUnavailable: 1   # we can have one pod unavailable.
   selector:
     matchLabels:
       app: nginx

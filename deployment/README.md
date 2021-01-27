@@ -5,6 +5,10 @@
 - kubectl create -f first.yml
 - kubectl describe deployment hello-deploy
 - kubectl get rs
+- kubectl get pods --show-labels
+- kubectl describe ep hello-svc
+- kubectl get ep
+
 
 ### access deploymnet
 kubectl create -f ./services/first.yml

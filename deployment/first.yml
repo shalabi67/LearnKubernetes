@@ -13,13 +13,18 @@ spec:
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
+
+  # Pod specification
   template:
     metadata:
       labels:
         app: hello-world
     spec:
+
+      # containers specification
       containers:
         - name: hello-pod
           image: nigelpoulton/pluralsight-docker-ci:latest
+           # imagePullPolicy: Always    #use with production this will be more secure
           ports:
             - containerPort: 8080
