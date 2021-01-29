@@ -1,3 +1,4 @@
 *.iml
 .idea/
 /getting-started-k8s-master/
+/DockerAndKubernetesCourseCode-main/

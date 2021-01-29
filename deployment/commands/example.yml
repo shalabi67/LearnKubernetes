@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commands-deploy
+  labels:
+    app: commands   # This is the deployment label
+spec:
+  replicas: 5
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: hello-example   # This is the selector matcher which should be the same as the Pod label
+
+  # Pod specification
+  template:
+    metadata:
+      labels:
+        app: hello-example # Pod label
+    spec:
+      # containers specification
+      containers:
+        - name: hello-container
+          image: nigelpoulton/pluralsight-docker-ci:latest
+           # imagePullPolicy: Always    #use with production this will be more secure
+          ports:
+            - containerPort: 8080

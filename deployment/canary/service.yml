@@ -1,0 +1,15 @@
+## using this service NorPort service will make it hard to see the stable and canary version
+apiVersion: v1
+kind: Service
+metadata:
+  name: canary
+  labels:
+    app: node-app
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30011
+      protocol: TCP
+  selector:
+    app: node-app

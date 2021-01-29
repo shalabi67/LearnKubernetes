@@ -1,0 +1,17 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-green-load-balancer
+  labels:
+    app: node-app
+    role: $TARGET_ROLE
+    env: prod
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8888
+    targetPort: 8080
+  selector:
+    app: node-app
+    role: $TARGET_ROLE

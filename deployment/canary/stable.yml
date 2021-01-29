@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stable-deployment
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2    # during update we can have extra two pods, which means we can have 6 pods while we are updating.
+      maxUnavailable: 1   # we can have one pod unavailable.
+  selector:
+    matchLabels:
+      app: node-app
+      track: stable
+  template:
+    metadata:
+      #name: canary-sample
+      labels:
+        app: node-app
+        track: stable
+    spec:
+      containers:
+        - name: stable-app
+          image: shalabi67/node-sample:1.0

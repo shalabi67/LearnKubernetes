@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-green-deployment-$TARGET_ROLE
+spec:
+  replicas: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2    # during update we can have extra two pods, which means we can have 6 pods while we are updating.
+      maxUnavailable: 1   # we can have one pod unavailable.
+  selector:
+    matchLabels:
+      app: node-app
+      role: $TARGET_ROLE
+  template:
+    metadata:
+      #name: canary-sample
+      labels:
+        app: node-app
+        role: $TARGET_ROLE
+    spec:
+      containers:
+        - name: stable-app-$TARGET_ROLE
+          image: shalabi67/node-sample:$IMAGE_VERSION
