@@ -1,0 +1,32 @@
+# This is an example shows how to share data between containers.
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: nginx-alpine-volume
+spec: 
+  containers: 
+  - name: nginx 
+    image: nginx:alpine
+    # This is the web server
+    volumeMounts: 
+      - name: html 
+        mountPath: /usr/share/nginx/html # This point /html in our shared volume. it is not a subdirectory in the shared volume
+        readOnly: true 
+    resources:
+  - name: html-updater 
+    image: alpine 
+    command: ["/bin/sh", "-c"]
+    # This container wil write data to shared volume. it will append date to /html/index.html
+    args: 
+      - while true; do date >> /html/index.html;sleep 10; done 
+    resources:
+    # This container will write data to share volume
+    volumeMounts: 
+      - name: html 
+        mountPath: /html  # This points to /html in our shared volume. it is not a subdirectory in the shared volume
+  volumes: 
+  - name: html 
+    emptyDir: {} #lifecycle tied to Pod
+    
+# kubectl apply -f emptyDir.yml
+# kubectl port-forward nginx-alpine-volume 8080:80

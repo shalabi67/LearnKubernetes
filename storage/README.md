@@ -1,5 +1,18 @@
 # Storage
 
+## emptyDir
+This example shows how to use emptyDir volume to share data between containers in the pod.
+- kubectl create -f emptyDir.yml --save-config
+- kubectl port-forward nginx-alpine-volume 8080:80
+- http://localhost:8080/
+
+## hostPath
+- kubectl create -f hostPath.yml --save-config
+- connect to pod: kubectl exec docker-volume -it sh
+- run docker command on container: docker ps
+- exit
+
+
 ## Volume
 in this example we will create two container and share a volume between them. 
 then we create a file in one container and show that the other container can access the file.

@@ -1,0 +1,30 @@
+# Note: While a local storage PV works, going with a more durable solution (NFS, cloud option, etc.) is recommended
+# Adding this for demo purposes to run on Docker Desktop Kubernetes since it only supports a single Node
+# https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  capacity:
+    storage: 1Gi
+  # volumeMode block feature gate enabled by default with 1.13+
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  # StorageClass has a reclaim policy default so it'll be "inherited" by the PV
+  # persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    # for linux
+    # path: /tmp/data/db
+    # for windows
+    path: /c/temp/data/db
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - docker-desktop
