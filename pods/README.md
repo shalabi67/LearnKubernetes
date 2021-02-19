@@ -49,9 +49,6 @@
 - kubectl explain pods.metadata
 
 
-## create namespace
-- kubectl create ns production -o yaml
-- kubectl delete ns production
-- kubectl create -f ns.yml
+
 
 
