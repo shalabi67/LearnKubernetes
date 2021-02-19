@@ -1,0 +1,16 @@
+FROM ubuntu
+ARG APP
+ARG DEPLOY
+ENV STAGE=default
+ENV BE_SVC=zalos-$APP-backend-$STAGE-$DEPLOY:8080
+
+COPY entry-point.sh entry-point.sh
+RUN chmod +x entry-point.sh
+
+COPY MANIFEST-template.MF MANIFEST-temp.MF
+COPY pom-template.properties pom-temp.properties
+
+#CMD entry-point.sh $STAGE
+CMD [ "sh", "-c", "./entry-point.sh $STAGE" ]
+
+
