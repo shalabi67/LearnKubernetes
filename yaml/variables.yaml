@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+busyBox: &busyBox
+  image: busybox
+  name: busy
+metadata:
+  name: busybox2
+spec:
+  containers:
+    - <<: *busyBox
+      command:
+        - sleep
+        - "3600"
+    - <<: *busyBox
+      command:
+        - env

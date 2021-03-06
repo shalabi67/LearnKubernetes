@@ -36,7 +36,7 @@ spec:
               key: enemies
               # optional: true    # Can mark a ConfigMap reference as optional
 
-        # Load all ConfigMap keys/values into environment variables (simplified way if you need them all vs. only a few as with "env" above)
+        # Load all ConfigMap keys/values into environment variables.yaml (simplified way if you need them all vs. only a few as with "env" above)
         envFrom:
         - configMapRef:
             name: app-settings

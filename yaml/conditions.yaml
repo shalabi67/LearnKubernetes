@@ -1,0 +1,20 @@
+# Not working yet
+apiVersion: v1
+kind: Pod
+busyBox: &busyBox
+  image: busybox
+  name: busy
+metadata:
+  name: condetions
+spec:
+  containers:
+    - <<: *busyBox
+{{#TEST}}
+      command:
+        - env
+{{/TEST}}
+{{^TEST}}
+      command:
+        - sleep
+        - "3600"
+{{/TEST}}

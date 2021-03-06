@@ -1,13 +1,12 @@
-# create as pod using environment variables.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: env-pod
+  name: cm-test-pod
 spec:
   containers:
-    - name: use-environment
+    - name: cm-test-pod
       image: cirros
-      command: ["/bin/sh", "-c", "env"]
+      command: ["/bin/sh", "-c", "env | grep VAR"]
       envFrom:
         - configMapRef:
             name: variables.yaml
