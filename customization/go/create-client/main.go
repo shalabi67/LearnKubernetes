@@ -21,7 +21,10 @@ func main() {
         return
     }
     flag.Parse()
-    config, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
+
+    config.AcceptContentTypes = "application/vnd.kubernetes.protobuf, application/json"
+    //config.ContentType = "application/vnd.kubernetes.protobuf"
+
     clientset, err := kubernetes.NewForConfig(config)
 
     namespace := "default"
