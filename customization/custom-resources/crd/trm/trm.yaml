@@ -1,0 +1,6 @@
+apiVersion: d2iq.com/v1beta1
+kind: Thermometer
+metadata:
+  name: simple-thermometer
+  namespace: default
+

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sdk-operator
+spec:
+  containers:
+    - name: sdk-operator
+      image: ibmgaragecloud/operator-sdk:0.10.4
+      #ports:
+      #  - containerPort: 8080
+
+
+

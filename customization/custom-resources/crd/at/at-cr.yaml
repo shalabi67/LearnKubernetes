@@ -1,0 +1,8 @@
+apiVersion: cnat.programming-kubernetes.info/v1alpha1
+kind: At
+metadata:
+  name: example-at
+spec:
+  schedule: "2019-07-03T02:00:00Z"
+status:
+  phase: "pending"   # This value will not be set since it belongs to a subgroup
