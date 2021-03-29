@@ -1,0 +1,8 @@
+apiVersion: "additional.printer.columns.com/v1"
+kind: AdditionalPrinterColumns
+metadata:
+  name: default-additional-printer-columns
+spec:
+  cronSpec: "5 0 * * *"
+  image: my-awesome-cron-image
+  replicas: 1

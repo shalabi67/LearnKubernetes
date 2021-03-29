@@ -1,0 +1,12 @@
+apiVersion: "subresource.com/v1"
+kind: StatusSubresource
+metadata:
+  name: status-subresource
+spec:
+  cronSpec: "5 0 * * *"
+  image: my-awesome-cron-image
+  replicas: 1
+
+# The changes here has no effect during creating or updating of the resource
+status:
+  phase: hidden  # will not be shown
