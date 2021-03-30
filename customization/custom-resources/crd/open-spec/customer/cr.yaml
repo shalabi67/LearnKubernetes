@@ -1,0 +1,22 @@
+apiVersion: complex.learn.com/v1
+kind: Customer
+metadata:
+  name: mohammad
+
+spec:
+  custometrId: 1
+  accountValue: 123
+  active: true
+  address:
+    name: mohammad
+    street: löwenberger str
+    city: berlin
+    zip: "10315"
+  contacts:
+    - name: saly
+      email: sally@gmail.com
+      phone: "12345"
+    - name: kamel
+      email: kame@gmail.com
+      phone: "23456789"
+
