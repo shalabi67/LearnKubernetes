@@ -5,6 +5,7 @@
 - if container does not exist
     - docker run  --name opeartor-sdk -it ibmgaragecloud/operator-sdk bash
     - docker cp  C:\Users\mohammad\.kube opeartor-sdk:/root/.kube
+    - docker cp  ~/.kube opeartor-sdk:/root/.kube
 - if container exist
     - docker start opeartor-sdk
     - docker exec -it opeartor-sdk  bash
