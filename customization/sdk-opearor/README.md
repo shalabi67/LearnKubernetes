@@ -4,6 +4,7 @@
 - docker pull ibmgaragecloud/operator-sdk
 - if container does not exist
     - docker run  --name operator-sdk -it ibmgaragecloud/operator-sdk bash
+    - docker run  --name operator-sdk -it shalabi67/operator-sdk bash
     - docker cp  C:\Users\mohammad\.kube operator-sdk:/root/.kube
     - docker cp  ~/.kube operator-sdk:/root/.kube
 - if container exist
