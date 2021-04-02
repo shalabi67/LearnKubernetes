@@ -28,7 +28,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	batchv1alpha1 "github.com/example/cronjob-operator/api/v1alpha1"
-	cronjobv1alpha1 "github.com/example/cronjob-operator/api/v1alpha1"
 	"github.com/example/cronjob-operator/controllers"
 	// +kubebuilder:scaffold:imports
 )
@@ -41,7 +40,6 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
-	utilruntime.Must(cronjobv1alpha1.AddToScheme(scheme))
 	utilruntime.Must(batchv1alpha1.AddToScheme(scheme))
 	// +kubebuilder:scaffold:scheme
 }
