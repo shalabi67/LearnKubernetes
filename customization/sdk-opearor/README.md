@@ -3,13 +3,14 @@
 ## docker
 - docker pull ibmgaragecloud/operator-sdk
 - if container does not exist
-    - docker run  --name opeartor-sdk -it ibmgaragecloud/operator-sdk bash
-    - docker cp  C:\Users\mohammad\.kube opeartor-sdk:/root/.kube
-    - docker cp  ~/.kube opeartor-sdk:/root/.kube
+    - docker run  --name operator-sdk -it ibmgaragecloud/operator-sdk bash
+    - docker cp  C:\Users\mohammad\.kube operator-sdk:/root/.kube
+    - docker cp  ~/.kube operator-sdk:/root/.kube
 - if container exist
-    - docker start opeartor-sdk
-    - docker exec -it opeartor-sdk  bash
--install docker on
+    - docker start operator-sdk
+    - docker exec -it operator-sdk  bash
+- yum -y install nano
+- install docker on
   - dnf -y install dnf-plugins-core
   - dnf config-manager \
     --add-repo \
