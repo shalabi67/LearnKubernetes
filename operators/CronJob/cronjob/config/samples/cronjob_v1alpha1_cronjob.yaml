@@ -1,7 +1,0 @@
-apiVersion: cronjob.learn.com/v1alpha1
-kind: CronJob
-metadata:
-  name: cronjob-sample
-spec:
-  # Add fields here
-  foo: bar

@@ -2,6 +2,8 @@
 This is a tutorial taken from [CronJob tutorial](https://book.kubebuilder.io/cronjob-tutorial/cronjob-tutorial.html).
 This main changed is using operator-sdk framework.
 
+docker cp ./ operator-sdk:/cronjob
+
 ## Step 1: create project
 - mkdir cronjob
   cd cronjob

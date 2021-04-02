@@ -1,21 +1,19 @@
 /*
-Copyright 2020 The Kubernetes authors.
+Copyright 2021.
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
+
     http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-// +kubebuilder:docs-gen:collapse=Apache License
 
-/*
-We'll start out with some imports.  You'll see below that we'll need a few more imports
-than those scaffolded for us.  We'll talk about each one when we use it.
-*/
 package controllers
 
 import (
@@ -36,10 +34,6 @@ import (
 
 	batch "github.com/example/cronjob-operator/api/v1alpha1"
 )
-
-/*
-Next, we'll need a Clock, which will allow us to fake timing in our tests.
-*/
 
 // CronJobReconciler reconciles a CronJob object
 type CronJobReconciler struct {
@@ -83,9 +77,19 @@ var (
 	scheduledTimeAnnotation = "batch.learn.com/scheduled-at"
 )
 
-func (r *CronJobReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
-	ctx := context.Background()
-	log := r.Log.WithValues("cronjob", req.NamespacedName)
+// Reconcile is part of the main kubernetes reconciliation loop which aims to
+// move the current state of the cluster closer to the desired state.
+// TODO(user): Modify the Reconcile function to compare the state specified by
+// the CronJob object against the actual cluster state, and then
+// perform operations to make the cluster state reflect the state specified by
+// the user.
+//
+// For more details, check Reconcile and its Result here:
+// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.7.2/pkg/reconcile
+func (r *CronJobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+	log  := r.Log.WithValues("cronjob", req.NamespacedName)
+
+	// your logic here
 
 	/*
 		### 1: Load the CronJob by name
@@ -133,7 +137,7 @@ func (r *CronJobReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 		of the world, so it's generally not a good idea to read from the status of the
 		root object.  Instead, you should reconstruct it every run.  That's what we'll
 		do here.
-		We can check if a job is "finished" and whether it Complete or Failed using status
+		We can check if a job is "finished" and whether it succeeded or failed using status
 		conditions.  We'll put that logic in a helper to make our code cleaner.
 	*/
 
@@ -520,7 +524,7 @@ func (r *CronJobReconciler) SetupWithManager(mgr ctrl.Manager) error {
 		r.Clock = realClock{}
 	}
 
-	if err := mgr.GetFieldIndexer().IndexField(context.Background(), &kbatch.Job{}, jobOwnerKey, func(rawObj runtime.Object) []string {
+	if err := mgr.GetFieldIndexer().IndexField(context.Background(), &kbatch.Job{}, jobOwnerKey, func(rawObj client.Object) []string {
 		// grab the job object, extract the owner...
 		job := rawObj.(*kbatch.Job)
 		owner := metav1.GetControllerOf(job)

@@ -1,11 +1,22 @@
 domain: learn.com
-layout: go.kubebuilder.io/v2
-projectName: temp1
+layout: go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: cronjob
 repo: github.com/example/cronjob-operator
 resources:
-- group: batch
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: learn.com
+  group: batch
   kind: CronJob
+  path: github.com/example/cronjob-operator/api/v1alpha1
   version: v1alpha1
-version: 3-alpha
-plugins:
-  go.sdk.operatorframework.io/v2-alpha: {}
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
+version: "3"
