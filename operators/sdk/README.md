@@ -16,5 +16,8 @@ we will use a docker image to do the installation.
     - docker cp c:\Users\mohammad\.kube operator-sdk:.kube
     - docker network connect  host operator-sdk
 
+## build operator-sdk
+- docker build -t operator-sdk:1.5 .
+- docker run --name operator-sdk -it operator-sdk:1.5 bash
 
 
