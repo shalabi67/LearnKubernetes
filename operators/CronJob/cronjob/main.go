@@ -27,6 +27,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
+	batchv1alpha1 "github.com/example/cronjob-operator/api/v1alpha1"
 	cronjobv1alpha1 "github.com/example/cronjob-operator/api/v1alpha1"
 	"github.com/example/cronjob-operator/controllers"
 	// +kubebuilder:scaffold:imports
@@ -41,6 +42,7 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	utilruntime.Must(cronjobv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(batchv1alpha1.AddToScheme(scheme))
 	// +kubebuilder:scaffold:scheme
 }
 
@@ -73,6 +75,10 @@ func main() {
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "CronJob")
+		os.Exit(1)
+	}
+	if err = (&batchv1alpha1.CronJob{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "CronJob")
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder

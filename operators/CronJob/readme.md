@@ -9,6 +9,7 @@ This main changed is using operator-sdk framework.
 - operator-sdk create api --group batch --version v1alpha1 --kind CronJob --resource --controller
 
 ## Step 2: copy init project
+- move to directord: \Learn\LearnKubernetes\operators\CronJob
 - docker cp operator-sdk:/cronjob/ ./
 - add to git
 - ignore the following: 
