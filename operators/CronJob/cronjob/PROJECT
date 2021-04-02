@@ -1,11 +1,12 @@
 domain: learn.com
 layout: go.kubebuilder.io/v2
-projectName: cronjob
+projectName: temp1
 repo: github.com/example/cronjob-operator
 resources:
-- group: cronjob
+- group: batch
   kind: CronJob
   version: v1alpha1
 version: 3-alpha
 plugins:
   go.sdk.operatorframework.io/v2-alpha: {}
+

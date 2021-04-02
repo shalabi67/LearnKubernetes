@@ -34,7 +34,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	batch "tutorial.kubebuilder.io/project/api/v1"
+	batch "github.com/example/cronjob-operator/api/v1alpha1"
 )
 
 /*
@@ -71,8 +71,8 @@ managing jobs now, we'll need permissions for those, which means adding
 a couple more [markers](/reference/markers/rbac.md).
 */
 
-// +kubebuilder:rbac:groups=batch.tutorial.kubebuilder.io,resources=cronjobs,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=batch.tutorial.kubebuilder.io,resources=cronjobs/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=batch.learn.com,resources=cronjobs,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=batch.learn.com,resources=cronjobs/status,verbs=get;update;patch
 // +kubebuilder:rbac:groups=batch,resources=jobs,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=batch,resources=jobs/status,verbs=get
 
@@ -80,7 +80,7 @@ a couple more [markers](/reference/markers/rbac.md).
 Now, we get to the heart of the controller -- the reconciler logic.
 */
 var (
-	scheduledTimeAnnotation = "batch.tutorial.kubebuilder.io/scheduled-at"
+	scheduledTimeAnnotation = "batch.learn.com/scheduled-at"
 )
 
 func (r *CronJobReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
