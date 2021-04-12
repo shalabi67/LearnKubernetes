@@ -57,3 +57,6 @@ RUN yum -y install nano
 
 ENV GOPATH=/go
 RUN mkdir -p ${GOPATH} && chmod +w ${GOPATH}
+
+RUN yum -y install docker && \
+    systemctl enable docker

@@ -5,7 +5,9 @@ metadata:
 spec:
   containers:
     - name: sdk-operator
-      image: ibmgaragecloud/operator-sdk:0.10.4
+      # image: ibmgaragecloud/operator-sdk:0.10.4
+      image: shalabi67/operator-sdk:1.5.1
+      command: ["/bin/bash"]
       #ports:
       #  - containerPort: 8080
 
