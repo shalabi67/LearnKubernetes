@@ -15,7 +15,7 @@ we will use a docker image to do the installation.
 ## Using docker
 -start operator-sdk
     - docker pull shalabi67/operator-sdk:1.5.2
-    - docker run --name operator-sdk  -it shalabi67/operator-sdk:1.5.2 bash
+    - docker run --name operator-sdk -v /home/mohammad/learn/LearnKubernetes/operators:/projects  -it shalabi67/operator-sdk:1.5.2 bash
     - docker container run -e "DOCKER_HOST=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')"
 
     - if container exist
@@ -25,7 +25,7 @@ we will use a docker image to do the installation.
 - from another terminal 2
     - docker cp c:\Users\mohammad\.kube operator-sdk:.kube
     - docker cp /home/mohammad/.kube operator-sdk:.kube
-    - docker network connect  host operator-sdk
+    - not used docker network connect  host operator-sdk
 
 - run on operator-sdk container
     - cp -r .kube/ ~/.kube
