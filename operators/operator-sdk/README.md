@@ -47,6 +47,7 @@ This documentation refers to container as the operator-sdk container, and host m
     - mkdir {operator}
     - cd {operator}
     - operator-sdk init --domain tutorial.kubebuilder.io --repo tutorial.kubebuilder.io/project
+    - operator-sdk create api --group batch --version v1 --kind CronJob --resource --controller
     
 - from host
   - from operator directory run: sudo sudo chmod -R 777 ./projects/
