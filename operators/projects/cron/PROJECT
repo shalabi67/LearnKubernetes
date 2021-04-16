@@ -1,0 +1,8 @@
+domain: tutorial.kubebuilder.io
+layout: go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: cron
+repo: tutorial.kubebuilder.io/project
+version: "3"
