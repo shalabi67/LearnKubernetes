@@ -23,7 +23,6 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
-
 /*
 First, let's take a look at our spec.  As we discussed before, spec holds
 *desired state*, so any "inputs" to our controller go here.
