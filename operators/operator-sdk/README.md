@@ -48,7 +48,8 @@ This documentation refers to container as the operator-sdk container, and host m
     - cd {operator}
     - operator-sdk init --domain tutorial.kubebuilder.io --repo tutorial.kubebuilder.io/project
     - operator-sdk create api --group batch --version v1 --kind CronJob --resource --controller
-    
+    - operator-sdk create webhook --group batch --version v1 --kind CronJob --defaulting --programmatic-validation    
+
 - from host
   - from operator directory run: sudo sudo chmod -R 777 ./projects/
   - docker cp operator-sdk:/projects /home/mohammad/learn/LearnKubernetes/operators/projects
