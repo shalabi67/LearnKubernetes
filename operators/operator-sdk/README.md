@@ -33,7 +33,7 @@ This documentation refers to container as the operator-sdk container, and host m
 
 - run on operator-sdk container
     - cp -r .kube/ ~/.kube
-    - chmod -R 777 ./projects/
+    - chmod -R 777 /projects/
     - if running windows machine: echo "192.168.178.10   kubernetes.docker.internal">>/etc/hosts
     - echo "export DOCKER_HOST=tcp://172.17.0.1:2375" >> ~/.bashrc && source ~/.bashrc
 
