@@ -8,6 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/clientcmd"
 
+	api "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/informers"
 	"k8s.io/client-go/tools/cache"
@@ -41,7 +42,11 @@ func main() {
 		},
 		UpdateFunc: func(old, new interface{}) {
 			mObj := new.(metav1.Object)
-			fmt.Printf("Update pod event. Pod Name= %s \n", mObj.GetName())
+			pod, ok := mObj.(*api.Pod)
+			if !ok {
+				return
+			}
+			fmt.Printf("Update pod event. Pod Name= %s With status= %s\n", mObj.GetName(), pod.Status.Phase)
 		},
 		DeleteFunc: func(obj interface{}) {
 			mObj := obj.(metav1.Object)
