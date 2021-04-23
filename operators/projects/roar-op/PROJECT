@@ -1,0 +1,18 @@
+domain: roarapp.com
+layout: go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: roar-op
+repo: github.com/shalabi67/roar-op
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: roarapp.com
+  group: roarapp
+  kind: RoarApp
+  path: github.com/shalabi67/roar-op/api/v1alpha1
+  version: v1alpha1
+version: "3"
