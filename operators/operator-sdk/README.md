@@ -51,7 +51,7 @@ This documentation refers to container as the operator-sdk container, and host m
     - operator-sdk create webhook --group batch --version v1 --kind CronJob --defaulting --programmatic-validation    
 
 - from host
-  - from operator directory run: sudo sudo chmod -R 777 ./projects/
+  - sudo chmod -R 777 /projects/  # from operator directory run:
   - docker cp operator-sdk:/projects /home/mohammad/learn/LearnKubernetes/operators/projects
 
 ## Not used
