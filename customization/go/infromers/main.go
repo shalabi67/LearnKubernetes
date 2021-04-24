@@ -36,6 +36,9 @@ func main() {
 	informerFactory := informers.NewSharedInformerFactory(clientset, time.Second*30)
 	podInformer := informerFactory.Core().V1().Pods()
 	podInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
+		///////////////////
+		// NEVER MUTATE OBJECTS FROM INFORMERS
+		/////////////////////
 		AddFunc: func(new interface{}) {
 			mObj := new.(metav1.Object)
 			fmt.Printf("Add pod event. Pod Name= %s \n", mObj.GetName())
