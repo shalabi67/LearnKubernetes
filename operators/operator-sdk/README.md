@@ -15,7 +15,7 @@ This documentation refers to container as the operator-sdk container, and host m
 - sudo systemctl restart docker
 
 ## Using docker
--start operator-sdk
+- start operator-sdk
     - docker pull shalabi67/operator-sdk:1.5.2
     - docker run --name operator-sdk \
         -v /home/mohammad/learn/LearnKubernetes/operators/projects:/projects \
