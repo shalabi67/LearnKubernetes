@@ -31,3 +31,6 @@
 - kubectl auth can-i list services --as=system:serviceaccount:auth:auth-sa --namespace=auth
 - should see no
 
+## clean up
+- kubectl delete -f ns.yaml
+
