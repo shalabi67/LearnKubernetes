@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-affinity-test2
+spec:
+  nodeSelector:
+    disk: SSD
+  containers:
+    - name: with-node-affinity-test2
+      image: nginx

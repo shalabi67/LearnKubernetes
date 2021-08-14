@@ -28,14 +28,29 @@ type WbcSnapshotSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of WbcSnapshot. Edit wbcsnapshot_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// source volume name for the snapshot.
+	SourceVolumeName string `json:"sourceVolumeName,omitempty"`
+
+	// source claim name for the snapshot
+	SourceClaimName  string `json:"sourceClaimName,omitempty"`
+
+	// snapshot namespace
+	Namespace        string `json:"nameSpace,omitempty"`
+
+	// host path to store the snapshot
+	HostPath         string `json:"hostPath,omitempty"`
 }
 
 // WbcSnapshotStatus defines the observed state of WbcSnapshot
 type WbcSnapshotStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// if true snapshot completed
+	Complete      bool   `json:"complete,omitempty"`
+
+	// snapshot new volume name
+	NewVolumeName string `json:"newVolumeName,omitempty"`
+
+	// snapshot new claim name
+	NewClaimName  string `json:"newClaimName,omitempty"`
 }
 
 //+kubebuilder:object:root=true
