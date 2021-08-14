@@ -1,0 +1,28 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: pod-antiaffinity-example3
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      affinity:
+        # Here we are specifying that no two nginx pods should be scheduled together.
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - nginx
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: nginx
+          image: nginx

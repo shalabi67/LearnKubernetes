@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-affinity-example1
+spec:
+  affinity:
+    # the pod affinity rule indicates that the pod can schedule onto a node only if that node has at least one
+    # already-running pod with a label that has the key security and value S1
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: security
+                operator: In
+                values:
+                  - S1
+          topologyKey: failure-domain.beta.kubernetes.io/zone
+  containers:
+    - name: with-pod-affinity
+      image: docker.io/ocpqe/hello-pod

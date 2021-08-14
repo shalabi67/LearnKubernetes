@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-anti-affinity-example2-5
+  labels:
+    app: web
+spec:
+  affinity:
+    # The pod anti-affinity rule says that no two web pods should be scheduled on the same node.
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - web
+          topologyKey: kubernetes.io/hostname
+  containers:
+    - name: with-pod-affinity
+      image: nginx
