@@ -23,6 +23,8 @@ docker run -d -p 8181:80  --name web2 sixeyed/prometheus-demo-web:linux
 ```
 cd monitoring/PromQL
 
+docker run -d --add-host=promo:192.168.178.12 --name=grafana -p 3000:3000 grafana/grafana
+
 docker run \
     -p 9090:9090 \
     -v ~/learn/LearnKubernetes/monitoring/PromQL:/etc/prometheus \

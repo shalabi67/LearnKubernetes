@@ -4,9 +4,12 @@
 ```
 cd monitoring/docker/static-configuration/
 
+docker run -d --add-host=promo:192.168.178.12 --name=grafana -p 3000:3000 grafana/grafana
+
 docker run \
     -p 9090:9090 \
     -v ~/learn/LearnKubernetes/monitoring/docker/static-configuration:/etc/prometheus \
+    --add-host=promo:192.168.178.12 \
     prom/prometheus
   
 ```

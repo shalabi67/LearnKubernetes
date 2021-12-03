@@ -14,10 +14,13 @@ cd node_exporter-1.3.0.linux-amd64
 ```
 cd monitoring/docker/dynamic-configuration/
 
+docker run -d --add-host=promo:192.168.178.12 --name=grafana -p 3000:3000 grafana/grafana
+
 docker run \
     -p 9090:9090 \
     -v ~/learn/LearnKubernetes/monitoring/docker/dynamic-configuration:/etc/prometheus \
     --name=prometheus \
+    --add-host=promo:192.168.178.12 \
     prom/prometheus \
     --config.file=/etc/prometheus/prometheus.yml \
     --web.enable-lifecycle   
