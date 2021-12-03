@@ -1,0 +1,12 @@
+[
+  {
+    "targets": [
+      "promo:8180",
+      "promo:8181"
+    ],
+    "labels": {
+      "os": "windows",
+      "runtime": "docker"
+    }
+  }
+]
