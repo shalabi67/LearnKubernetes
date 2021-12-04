@@ -3,5 +3,20 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
+    kubeadmConfigPatches:
+    - |
+      kind: ClusterConfiguration
+      apiServer:
+          extraArgs:
+            service-node-port-range: 2000-32767
   - role: worker
-  - role: worker
+    extraPortMappings:
+    - containerPort: 5050
+      hostPort: 5050
+      # optional: set the bind address on the host
+      # 0.0.0.0 is the current default
+      listenAddress: "127.0.0.1"
+      # optional: set the protocol to one of TCP, UDP, SCTP.
+      # TCP is the default
+      protocol: TCP
+ # - role: worker
