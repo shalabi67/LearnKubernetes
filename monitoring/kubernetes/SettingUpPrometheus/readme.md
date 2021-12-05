@@ -4,7 +4,6 @@
 
 ## setting kubernetes
 - from local-setup directory install kind
-- kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
 
 ## setting prometheus
 ```
@@ -20,10 +19,33 @@ kubectl apply -f prometheus-config-map.yml
 
 kubectl apply -f prometheus-deployment.yml
 
+kubectl apply -f prometheus-service.yml
 
+kubectl apply -f clusterRole.yml
 
+kubectl apply -f kube-state-metrics.yml
 
+```
 
+## setting grafana
+```
+kubectl apply -f grafana/grafana-deployment.yml
 
+kubectl apply -f grafana/grafana-service.yml
+```
 
+### setting exporter
+```
+docker cp ~/Downloads/node_exporter kind-control-plane:/usr/local/bin/
+docker cp ~/Downloads/node_exporter kind-worker:/usr/local/bin/
+
+docker exec -it kind-control-plane sh
+useradd -M -r -s /bin/false node_exporter
+chown node_exporter:node_exporter /usr/local/bin/node_exporter
+node_exporter
+
+docker exec -it kind-worker sh
+useradd -M -r -s /bin/false node_exporter
+chown node_exporter:node_exporter /usr/local/bin/node_exporter
+node_exporter
 ```

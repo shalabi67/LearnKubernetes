@@ -6,6 +6,9 @@
 wget https://github.com/prometheus/node_exporter/releases/download/v1.3.0/node_exporter-1.3.0.linux-amd64.tar.gz
 tar xvfz node_exporter-1.3.0.linux-amd64.tar.gz
 cd node_exporter-1.3.0.linux-amd64.tar.gz
+
+sudo lsof -i -P -n | grep  9100
+sudo kill -9 1567
 ```
 
 - setup node-exporter as a service
