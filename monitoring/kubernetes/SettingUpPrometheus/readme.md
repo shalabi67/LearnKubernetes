@@ -10,8 +10,8 @@
 ```
 kubectl apply -f namespaces.yml
 
+# get ip adress  NO NEED TO DO THAT
 docker ps
-# get ip adress
 docker inspect kind-worker
 docker inspect kind-control-plane
 
@@ -26,6 +26,7 @@ kubectl apply -f clusterRole.yml
 
 kubectl apply -f kube-state-metrics.yml
 
+http://localhost:5050/
 ```
 
 ## setting grafana
@@ -33,6 +34,10 @@ kubectl apply -f kube-state-metrics.yml
 kubectl apply -f grafana/grafana-deployment.yml
 
 kubectl apply -f grafana/grafana-service.yml
+
+http://localhost:8000
+usename: admin
+password: password
 ```
 
 ### setting exporter
@@ -58,10 +63,33 @@ kubectl get pods -A
 kubectl delete pods prometheus-deployment-7596b86cb9-zrpvz -n monitoring
 ```
 
+## Adding application
+kubectl apply -f application/deployment.yml
+
+http://localhost:8001/swagger-stats/metrics
 ## Adding rules
 ```
 kubectl apply -f readrules/prometheus-config-map.yml
 kubectl apply -f readrules/prometheus-read-rules-map.yml
 kubectl apply -f readrules/prometheus-deployment.yml
 
+```
+
+## alert manager
+- create slack: learnoliver108@gmail.com [slack](https://app.slack.com/client/T02PCMY93N2/C02PGEXBJKF)
+
+```
+kubectl apply -f alertmanager/alertmanager-configmap.yml
+
+kubectl apply -f alertmanager/alertmanager-depoloyment.yml
+
+kubectl get pods -A
+
+kubectl apply -f alertmanager/alertmanager-service.yml 
+
+kubectl apply -f alertmanager/prometheus-config-map.yml
+ 
+kubectl apply -f alertmanager/prometheus-rules-config-map.yml
+
+http://localhost:5051/#/alerts 
 ```
