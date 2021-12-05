@@ -57,3 +57,11 @@ kubectl apply -f prometheus-config-map.yml
 kubectl get pods -A
 kubectl delete pods prometheus-deployment-7596b86cb9-zrpvz -n monitoring
 ```
+
+## Adding rules
+```
+kubectl apply -f readrules/prometheus-config-map.yml
+kubectl apply -f readrules/prometheus-read-rules-map.yml
+kubectl apply -f readrules/prometheus-deployment.yml
+
+```
