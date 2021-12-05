@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: grafana-service
   namespace: monitoring
+# notice this is not expose to service discovery since grafana does not expose metrics
+#  annotations:
+#    prometheus.io/scrape: 'true'
+#    prometheus.io/port:   '3000'
 
 spec:
   selector:

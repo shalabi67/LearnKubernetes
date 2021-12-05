@@ -1,6 +1,7 @@
 # Setting up prometheus on kubernetes.
 - [source code](https://github.com/linuxacademy/content-kubernetes-prometheus-env)
 - [Training course: Monitoring Kubernetes With Prometheus](https://learn.acloud.guru/course/97037e05-88ed-41a1-92ee-f5a8080318c2/dashboard)
+- [nodejs application source code](https://github.com/linuxacademy/content-kubernetes-prometheus-app)
 
 ## setting kubernetes
 - from local-setup directory install kind
@@ -48,4 +49,11 @@ docker exec -it kind-worker sh
 useradd -M -r -s /bin/false node_exporter
 chown node_exporter:node_exporter /usr/local/bin/node_exporter
 node_exporter
+```
+
+## changing configuration
+```
+kubectl apply -f prometheus-config-map.yml
+kubectl get pods -A
+kubectl delete pods prometheus-deployment-7596b86cb9-zrpvz -n monitoring
 ```
