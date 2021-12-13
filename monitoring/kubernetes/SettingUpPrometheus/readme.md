@@ -15,7 +15,7 @@ docker ps
 docker inspect kind-worker
 docker inspect kind-control-plane
 
-# change ip address in prometheus-config-map.yml file by replacing <KUBERNETES_IP> with the ip address
+# change ip address in prometheus-config-map.yml file by replacing <KUBERNETES_IP> with the host ip address
 kubectl apply -f prometheus-config-map.yml
 
 kubectl apply -f prometheus-deployment.yml

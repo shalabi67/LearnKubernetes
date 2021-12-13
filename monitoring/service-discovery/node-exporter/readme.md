@@ -1,5 +1,13 @@
 # node-exporter
 
+## build
+```
+docker build -t shalabi67/exporter:trafic .
+docker push shalabi67/exporter:trafic
+
+docker build -t shalabi67/exporter:notrafic .
+docker push shalabi67/exporter:notrafic
+```
 ## setup
 - download node-exporter
 ```

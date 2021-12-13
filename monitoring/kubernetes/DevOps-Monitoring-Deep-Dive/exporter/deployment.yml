@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exporter-with-traffic
+  namespace: monitoring
+  labels:
+    app: exporter-with-traffic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exporter-with-traffic
+  template:
+    metadata:
+      labels:
+        app: exporter-with-traffic
+    spec:
+      containers:
+        - name: exporter-with-traffic
+          image: shalabi67/exporter:trafic
+          ports:
+            - containerPort: 9100
