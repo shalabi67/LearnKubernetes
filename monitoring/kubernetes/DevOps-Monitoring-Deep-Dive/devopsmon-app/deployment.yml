@@ -26,8 +26,7 @@ spec:
         app: todolist
       annotations:
             prometheus.io/scrape: "true"
-            prometheus.io/path: 'swagger-stats/metrics'
-            prometheus.io/port: "3000"
+            prometheus.io/port: "8080"
     spec:
       containers:
         - name: todolist

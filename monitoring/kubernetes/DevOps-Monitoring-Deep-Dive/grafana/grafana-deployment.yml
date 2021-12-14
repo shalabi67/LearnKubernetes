@@ -3,32 +3,26 @@ kind: Deployment
 metadata:
   name: grafana
   namespace: monitoring
-  labels:
-    app: grafana
-    component: core
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: grafana
-      component: core
   template:
     metadata:
+      name: grafana
       labels:
         app: grafana
-        component: core
     spec:
       containers:
-        - image: grafana/grafana
-          name: grafana
-          env:
-            - name: GF_SECURITY_ADMIN_PASSWORD
-              value: password
+        - name: grafana
+          image: grafana/grafana:latest
           ports:
-            - containerPort: 3000
+            - name: grafana
+              containerPort: 3000
           volumeMounts:
-          - name: grafana-persistent-storage
-            mountPath: /var
+            - mountPath: /var/lib/grafana
+              name: grafana-storage
       volumes:
-      - name: grafana-persistent-storage
-        emptyDir: {}
+        - name: grafana-storage
+          emptyDir: {}

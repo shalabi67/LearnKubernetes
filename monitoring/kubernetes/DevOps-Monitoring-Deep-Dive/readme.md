@@ -1,5 +1,6 @@
 # DevOps Monitoring Deep Dive
 [course](https://learn.acloud.guru/course/97037e05-88ed-41a1-92ee-f5a8080318c2/dashboard)
+[App code](https://github.com/linuxacademy/content-devops-monitoring-app)
 
 ## kind cluster
 ```
