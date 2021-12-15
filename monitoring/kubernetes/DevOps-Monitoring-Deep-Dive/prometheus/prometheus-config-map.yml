@@ -11,6 +11,9 @@ data:
       scrape_interval: 5s
       evaluation_interval: 5s
 
+    rule_files:
+      - "/var/prometheus/rules/*_rules.yml"
+
     scrape_configs:
       - job_name: 'node-exporter'
         static_configs:

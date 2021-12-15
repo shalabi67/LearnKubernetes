@@ -18,6 +18,8 @@ docker inspect kind-control-plane
 # change ip address in prometheus-config-map.yml file by replacing <KUBERNETES_IP> with the host ip address
 kubectl apply -f prometheus/prometheus-config-map.yml
 
+kubectl apply -f prometheus/rules-config-map.yml
+
 kubectl apply -f prometheus/prometheus-deployment.yml
 
 kubectl apply -f prometheus/prometheus-service.yml
@@ -52,6 +54,11 @@ docker push shalabi67/devopsmon-app
 kubectl apply -f devopsmon-app/deployment.yml
 
 http://localhost:8001/
+```
+
+- apply application rules
+```
+kubectl apply -f devopsmon-app/rules-config-map.yml
 ```
 
 ## setup exporter with traffic

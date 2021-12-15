@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: prometheus-rules-conf
+  namespace: monitoring
+data:
+  todolist_rules.yml: |
+    groups:
+      - name: uptime
+        rules:
+        - record: job:uptime:average:ft
+          expr: avg without(instance,pod_template_hash, kubernetes_namespace, kubernetes_pod_name, job)(up{app="todolist"})
+        - alert: ForethoughtApplicationDown
+          expr: job:uptime:average:ft < .75
+          for: 5m
+          labels:
+            severity: page
+            team: devops
+          annotations:
+            overview: '{{printf "%.2f" $value}}% instances are up for {{ $labels.job }}'
