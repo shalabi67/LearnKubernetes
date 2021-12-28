@@ -1,0 +1,26 @@
+[
+  {
+    "targets": [ "promo:9100" ],
+    "labels": {
+      "os": "linux",
+      "runtime": "vm"
+    }
+  },
+  {
+    "targets": [ "promo:9102" ],
+    "labels": {
+      "os": "linux",
+      "runtime": "container"
+    }
+  },
+  {
+    "targets": [
+      "promo:8280",
+      "promo:8281"
+    ],
+    "labels": {
+      "os": "linux",
+      "runtime": "container"
+    }
+  }
+]

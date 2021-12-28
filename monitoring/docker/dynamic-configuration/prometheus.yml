@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 20s  # default 1m
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'linux'
+    file_sd_configs:
+      - files:
+          - 'linux.json'
+
+  - job_name: 'web'
+    file_sd_configs:
+      - files:
+          - 'web.json'
+
+  - job_name: 'kubernetes'
+    file_sd_configs:
+      - files:
+          - 'kubernetes.json'

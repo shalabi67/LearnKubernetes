@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-conf
+  labels:
+    name: alertmanager-conf
+  namespace: monitoring
+data:
+  alertmanager.yml: |
+    global:
+      smtp_smarthost: 'localhost:25'
+      smtp_from: 'alertmanager@linuxacademy.org'
+      smtp_require_tls: false
+    route:
+      receiver: slack_receiver
+    receivers:
+    - name: slack_receiver
+      slack_configs:
+      - send_resolved: true
+        username: 'learn-oliver'
+        api_url: 'https://hooks.slack.com/services/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'
+        channel: '#alerts'

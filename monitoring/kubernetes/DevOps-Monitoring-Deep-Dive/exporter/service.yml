@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: exporter-with-traffic
+  namespace: monitoring
+  labels:
+    app: exporter-with-traffic
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9100'
+spec:
+  selector:
+    app: exporter-with-traffic
+  type: NodePort
+  ports:
+  - port: 9100
+    targetPort: 9100
+    nodePort: 9100
