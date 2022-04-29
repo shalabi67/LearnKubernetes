@@ -1,0 +1,49 @@
+# three node (two workers) cluster config
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+networking:
+ # podSubnet: "10.244.0.0/16"
+ # serviceSubnet: "10.96.0.0/12"
+  disableDefaultCNI: true  # to install Calico
+nodes:
+  - role: control-plane
+    extraPortMappings:
+    # ssh
+    - containerPort: 22
+      hostPort: 2221
+    kubeadmConfigPatches:
+    - |
+      kind: ClusterConfiguration
+      apiServer:
+          extraArgs:
+            service-node-port-range: 2000-32767
+  - role: worker
+    extraPortMappings:
+    # ssh
+    - containerPort: 22
+      hostPort: 2222
+    kubeadmConfigPatches:
+    - |
+      kind: InitConfiguration
+      nodeRegistration:
+          name: worker1
+  - role: worker
+    extraPortMappings:
+    # ssh
+    - containerPort: 22
+      hostPort: 2223
+    kubeadmConfigPatches:
+    - |
+      kind: InitConfiguration
+      nodeRegistration:
+          name: worker2
+  - role: worker
+    extraPortMappings:
+    # ssh
+    - containerPort: 22
+      hostPort: 2224
+    kubeadmConfigPatches:
+    - |
+      kind: InitConfiguration
+      nodeRegistration:
+          name: worker3    
