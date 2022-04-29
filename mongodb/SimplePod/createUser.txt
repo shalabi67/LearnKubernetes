@@ -1,0 +1,17 @@
+db.createUser({
+    user: "mohammad",
+    pwd: "password123",
+    roles: [
+      {role: "root", db: "admin"}
+    ]
+  })
+
+mongo admin --host localhost --eval '
+  db.createUser({
+    user: "mohammad",
+    pwd: "password123",
+    roles: [
+      {role: "root", db: "admin"}
+    ]
+  })
+'

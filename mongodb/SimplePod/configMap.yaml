@@ -10,5 +10,7 @@ data:
       path: "/data/db/logs/mongod.log"
       destination: "file"
       logAppend: true
+    security:
+      authorization: "enabled"
       
       

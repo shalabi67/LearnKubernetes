@@ -29,5 +29,24 @@ export KUBECONFIG=~/.kube/kind
 kubectl exec -it mongo-client -- /bin/bash
 mongo
 show dbs
+
+use admin
+db.stats()
+```
+### security
+```
+use admin
+db.createUser({
+    user: "mohammad",
+    pwd: "password123",
+    roles: [
+      {role: "root", db: "admin"}
+    ]
+  })
+mongo --username mohammad --password password123 --authenticationDatabase admin
 ```
 
+### find mongo applications
+```
+find /usr/bin/ -name "mongo*"
+```
