@@ -50,3 +50,19 @@ mongo --username mohammad --password password123 --authenticationDatabase admin
 ```
 find /usr/bin/ -name "mongo*"
 ```
+
+### use mongo tools
+copy data to pod
+```
+kubectl cp ../databases/products.json mongod-1:/data/products.json
+
+```
+
+importing data
+```
+mongoimport -d shop -c products -u mohammad -p password123 --authenticationDatabase admin /data/products.json
+mongo --username mohammad --password password123 --authenticationDatabase admin
+use shop
+db.products.find()
+```
+
