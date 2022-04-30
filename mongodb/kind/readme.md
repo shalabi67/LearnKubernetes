@@ -1,4 +1,4 @@
 # kind setup
 ```
-kind create cluster --config kind-config.yaml
+kind create cluster --name single --config kind-config.yaml
 ```

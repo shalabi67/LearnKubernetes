@@ -4,8 +4,14 @@ https://devopscube.com/deploy-mongodb-kubernetes/
 
 ## kind setup
 ```
-kind delete cluster
-kind create cluster --config ../kind/kind-config.yaml
+kind delete cluster --name single
+kind create cluster --name single --config ../kind/kind-config.yaml
+kubectl config set-context kind-single
+
+sudo rm -dr ../data/mongo/*.*
+sudo rm -dr ../data/mongo/logs
+sudo rm -dr ../data/mongo/journal/
+sudo rm -dr ../data/mongo/WiredTiger
 ```
 
 ## Mongo setup
