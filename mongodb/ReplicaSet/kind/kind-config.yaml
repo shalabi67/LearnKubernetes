@@ -1,0 +1,31 @@
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+nodes:
+  - role: control-plane
+  - role: worker
+    extraPortMappings:
+      - containerPort: 27011
+        hostPort: 27011
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica1
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs1
+        containerPath: /logs
+  - role: worker
+    extraPortMappings:
+      - containerPort: 27011
+        hostPort: 27012
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica2
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs2
+        containerPath: /logs
+  - role: worker
+    extraPortMappings:
+      - containerPort: 27011
+        hostPort: 27013
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica3
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs3
+        containerPath: /logs

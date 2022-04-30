@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: replica3
+
+spec:
+  selector:
+    app: replica3
+  ports:
+    - protocol: TCP
+      port: 27013
+      targetPort: 27013

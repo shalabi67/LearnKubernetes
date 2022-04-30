@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keyfile
+data:
+  keyfile: |
+    IP5mtXmvD8RU3UGhFsUhr9Tum51Eygr0ulSkv7VvRLsS5ANzaFaSwh8Wx6Y6Z7bu
+    yYhcdNu+gVFytfN8ayNRRsHijgfbBgv+m3Z8Y/H4jK9kryzBQHvwJw6NENRQjuLG
+    xt2u13aGYeEw/oVB47XUZCHpItGkrmhhSEVp8KpxddAMhWK7WhdxW7f7W2XsDJoD
+    E0+bg9bvlXCaStGnyQJHx0oq1y0j0dEKtapg04iQHL8iPmteoNM7YsC4kl/8dudd
+    saO6PJKrfjif5knWP36KvKePSdRTGJ1gKeTAHAr8fUwn3qpKsZ80seB01+V8XCkE
+    Wdw8khhiJmjePUEvhFz2isAkGWaMWyNQruaJAMOThyHCwlqP9itQcUpxMavMqW3d
+    +3l0qaauDgEsVKXdzJrIU6kR3TGQFF+HcJD65sB4J8J8oSktmc/3bIPjGekt0d+k
+    B6NoLzIBT2okBANNHGqa/Zy6JENcD3g0E8SSXQCT0WCt7X+qT0LX3jLC5ru8Mt1o
+    XodEzgzQD6jxwhhgBdxDf9SZC0hAm+LAVVvcDSTwqwIdbqTqk9he8n/Vk5LAdGsP
+    d4vyDF7jg9+S/akWRW6JyosJYqGkRK5FapNMcN1Q65OIeHBCSlEbVryHBr2oSUe0
+    t4JhQp99cWJie7F9IPkvCaxMYCEkRQy9xWihpMyxrkejTckf4i78HddUEI8zCT2Y
+    MhBboOyOaD/6FbR45UOu4INvMVZmEqlDyU+Rbh5/rmX+rIraj/9g3EKgmBxzL2ad
+    fDH9LvNBIXuRCAB4YtUbRMnjn9/GaFtaEgTXfGXiltDipRDmLSuZ5MIEyjepZDZx
+    wYSVLDqWQwPEvalipMJKQ6m74SxcMg1fLgK9Q+3262Jga/Gcx926aEsSbxWo3ZoD
+    TFUlnRtlVVcBuzI90J2lpmz2/PuUUzk/0qYx4g7sYaLNe6jisDnMFvafmnkVUKVo
+    olJP3LvrjU0zKqj0TRsG1d9eP+Pu
+
+  
+

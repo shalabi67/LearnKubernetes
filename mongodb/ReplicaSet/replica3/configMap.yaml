@@ -1,16 +1,23 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mongod-config
+  name: replica3-config
 data:
   config.yaml: |
     storage:
       dbPath: "/data/db"
     systemLog:
-      path: "/data/db/logs/mongod.log"
+      path: "/logs/mongod.log"
       destination: "file"
       logAppend: true
+    net:
+      bindIpAll: true
+      port: 27013
     security:
       authorization: "enabled"
+      keyFile: "/logs/keyfile"
+    replication:
+      replSetName: "repl-example" 
+      
       
       

@@ -15,7 +15,6 @@ kind create cluster --config ../kind/kind-config.yaml
  kubectl apply -f mongod-pv.yaml
  kubectl apply -f mongod-pvc.yaml 
  kubectl apply -f mongod.yaml
- kubectl apply -f mongo.yaml
 ```
 
 to create a config map
@@ -26,7 +25,7 @@ kubectl create cm nginy-server-config --from-file config.yaml
 ## Test setup
 ```
 export KUBECONFIG=~/.kube/kind
-kubectl exec -it mongo-client -- /bin/bash
+kubectl exec -it mongod-1 -- /bin/bash
 mongo
 show dbs
 
