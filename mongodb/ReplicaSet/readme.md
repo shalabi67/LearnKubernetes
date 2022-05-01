@@ -112,7 +112,7 @@ db.createUser({
 
 mongosh --host "repl-example/localhost:27017" --username mohammad --password password123 --authenticationDatabase admin
 rs.status()
-rs.add("replica2:27012")
-rs.add("replica3:27013")
+rs.add("replica2:27017")
+rs.add("replica3:27017")
 rs.isMaster()
 ```

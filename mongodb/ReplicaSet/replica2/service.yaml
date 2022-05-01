@@ -8,5 +8,5 @@ spec:
     app: replica2
   ports:
     - protocol: TCP
-      port: 27012
+      port: 27017
       targetPort: 27017
