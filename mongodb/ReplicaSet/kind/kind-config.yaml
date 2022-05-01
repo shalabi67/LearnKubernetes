@@ -4,8 +4,8 @@ nodes:
   - role: control-plane
   - role: worker
     extraPortMappings:
-      - containerPort: 27011
-        hostPort: 27011
+      - containerPort: 27017
+        hostPort: 27001
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica1
         containerPath: /data
@@ -13,8 +13,8 @@ nodes:
         containerPath: /logs
   - role: worker
     extraPortMappings:
-      - containerPort: 27011
-        hostPort: 27012
+      - containerPort: 27017
+        hostPort: 27002
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica2
         containerPath: /data
@@ -22,10 +22,39 @@ nodes:
         containerPath: /logs
   - role: worker
     extraPortMappings:
-      - containerPort: 27011
-        hostPort: 27013
+      - containerPort: 27017
+        hostPort: 27003
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica3
         containerPath: /data
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs3
+        containerPath: /logs
+  - role: worker  # arbiter
+    extraPortMappings:
+      - containerPort: 27017
+        hostPort: 27004
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica4
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs4
+        containerPath: /logs
+
+  - role: worker # hidden
+    extraPortMappings:
+      - containerPort: 27017
+        hostPort: 27005
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica5
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs5
+        containerPath: /logs
+
+  - role: worker # slave-delay
+    extraPortMappings:
+      - containerPort: 27017
+        hostPort: 27006
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica6
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs6
         containerPath: /logs

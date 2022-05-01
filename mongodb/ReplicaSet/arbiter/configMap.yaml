@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: arbiter-config
+data:
+  config.yaml: |
+    storage:
+      dbPath: "/data/db"
+    systemLog:
+      path: "/logs/mongod.log"
+      destination: "file"
+      logAppend: true
+    net:
+      bindIpAll: true
+    security:
+      authorization: "enabled"
+      keyFile: "/logs/keyfile"
+    replication:
+      replSetName: "repl-example" 
+      
+      
+      
