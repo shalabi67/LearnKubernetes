@@ -12,6 +12,7 @@ data:
       logAppend: true
     net:
       bindIpAll: true
+      port: 27003
     security:
       authorization: "enabled"
       keyFile: "/logs/keyfile"

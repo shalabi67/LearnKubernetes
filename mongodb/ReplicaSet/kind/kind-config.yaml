@@ -10,7 +10,7 @@ nodes:
             service-node-port-range: 2000-32767
   - role: worker
     extraPortMappings:
-      - containerPort: 27017
+      - containerPort: 27031
         hostPort: 27001
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica1
@@ -21,7 +21,7 @@ nodes:
 
   - role: worker
     extraPortMappings:
-      - containerPort: 27017
+      - containerPort: 27032
         hostPort: 27002
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica2
@@ -31,7 +31,7 @@ nodes:
 
   - role: worker
     extraPortMappings:
-      - containerPort: 27017
+      - containerPort: 27033
         hostPort: 27003
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica3
@@ -41,7 +41,7 @@ nodes:
 
   - role: worker  # arbiter
     extraPortMappings:
-      - containerPort: 27017
+      - containerPort: 27034
         hostPort: 27004
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica4
@@ -51,7 +51,7 @@ nodes:
 
   - role: worker # hidden
     extraPortMappings:
-      - containerPort: 27017
+      - containerPort: 27035
         hostPort: 27005
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica5
@@ -61,7 +61,7 @@ nodes:
 
   - role: worker # slave-delay
     extraPortMappings:
-      - containerPort: 27017
+      - containerPort: 27036
         hostPort: 27006
     extraMounts:
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Replica6

@@ -1,5 +1,16 @@
 # replica sets
 
+## setup host
+```
+sudo cp /etc/hosts hosts
+sudo chown mshalabai hosts
+echo "# The following lines for mongo replication" >>hosts
+echo "127.0.0.1	  replica1">>hosts
+echo "127.0.0.1	  replica2">>hosts
+echo "127.0.0.1	  replica3">>hosts
+sudo chown root hosts
+sudo mv hosts /etc/hosts 
+```
 ## setup kind
 ```
 kind delete cluster
@@ -76,12 +87,14 @@ kubectl apply -f replica1/service.yaml
 kubectl apply -f replica1/service-node.yaml 
 kubectl apply -f replica1/mongod.yaml
 
-mongo --disableImplicitSessions --port 27011 --eval "db.adminCommand('ping')" 
+mongo --disableImplicitSessions --port 27017 --eval "db.adminCommand('ping')" 
 
-mongo --host "repl-example/replica1:27011" --username mohammad --password password123 --authenticationDatabase admin
+mongo --host "repl-example/replica1:27017" --username mohammad --password password123 --authenticationDatabase admin
 
 conect from host machine
 mongo --host "localhost:27001" --username mohammad --password password123 --authenticationDatabase admin
+mongo --host "repl-example/replica1:27011" --username mohammad --password password123 --authenticationDatabase admin
+
 ```
 
 
