@@ -2,12 +2,6 @@ apiVersion: kind.x-k8s.io/v1alpha4
 kind: Cluster
 nodes:
   - role: control-plane
-    kubeadmConfigPatches:
-    - |
-      kind: ClusterConfiguration
-      apiServer:
-          extraArgs:
-            service-node-port-range: 2000-32767
   - role: worker
     extraPortMappings:
       - containerPort: 27017
@@ -17,8 +11,6 @@ nodes:
         containerPath: /data
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs1
         containerPath: /logs
-
-
   - role: worker
     extraPortMappings:
       - containerPort: 27017
@@ -28,7 +20,6 @@ nodes:
         containerPath: /data
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs2
         containerPath: /logs
-
   - role: worker
     extraPortMappings:
       - containerPort: 27017
@@ -38,7 +29,6 @@ nodes:
         containerPath: /data
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs3
         containerPath: /logs
-
   - role: worker  # arbiter
     extraPortMappings:
       - containerPort: 27017
@@ -68,4 +58,3 @@ nodes:
         containerPath: /data
       - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/ReplicaSet/Data/Logs6
         containerPath: /logs
-
