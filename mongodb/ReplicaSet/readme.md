@@ -73,12 +73,15 @@ kubectl apply -f replica1/mongod-pvc.yaml
 kubectl apply -f replica1/mongod-logs-pv.yaml
 kubectl apply -f replica1/mongod-logs-pvc.yaml
 kubectl apply -f replica1/service.yaml
+kubectl apply -f replica1/service-node.yaml 
 kubectl apply -f replica1/mongod.yaml
 
 mongo --disableImplicitSessions --port 27011 --eval "db.adminCommand('ping')" 
 
 mongo --host "repl-example/replica1:27011" --username mohammad --password password123 --authenticationDatabase admin
 
+conect from host machine
+mongo --host "localhost:27001" --username mohammad --password password123 --authenticationDatabase admin
 ```
 
 
@@ -98,6 +101,7 @@ kubectl apply -f replica2/mongod-pvc.yaml
 kubectl apply -f replica2/mongod-logs-pv.yaml
 kubectl apply -f replica2/mongod-logs-pvc.yaml
 kubectl apply -f replica2/service.yaml
+kubectl apply -f replica2/service-node.yaml 
 kubectl apply -f replica2/mongod.yaml
 ```
 
@@ -118,6 +122,7 @@ kubectl apply -f replica3/mongod-pvc.yaml
 kubectl apply -f replica3/mongod-logs-pv.yaml
 kubectl apply -f replica3/mongod-logs-pvc.yaml
 kubectl apply -f replica3/service.yaml
+kubectl apply -f replica3/service-node.yaml 
 kubectl apply -f replica3/mongod.yaml
 ```
 
@@ -137,6 +142,7 @@ kubectl apply -f arbiter/mongod-pvc.yaml
 kubectl apply -f arbiter/mongod-logs-pv.yaml
 kubectl apply -f arbiter/mongod-logs-pvc.yaml
 kubectl apply -f arbiter/service.yaml
+kubectl apply -f arbiter/service-node.yaml 
 kubectl apply -f arbiter/mongod.yaml
 ```
 
@@ -156,27 +162,10 @@ kubectl apply -f hidden/mongod-pvc.yaml
 kubectl apply -f hidden/mongod-logs-pv.yaml
 kubectl apply -f hidden/mongod-logs-pvc.yaml
 kubectl apply -f hidden/service.yaml
+kubectl apply -f hidden/service-node.yaml 
 kubectl apply -f hidden/mongod.yaml
 ```
 
-### hidden (replica5)
-cleanup
-```
-sudo rm -dr Data/Replica5/*.*
-sudo rm -dr Data/Replica5/journal/
-sudo rm -dr Data/Replica5/WiredTiger
-sudo rm Data/Logs5/mongod.log
-```
-
-```
-kubectl apply -f hidden/configMap.yaml
-kubectl apply -f hidden/mongod-pv.yaml
-kubectl apply -f hidden/mongod-pvc.yaml
-kubectl apply -f hidden/mongod-logs-pv.yaml
-kubectl apply -f hidden/mongod-logs-pvc.yaml
-kubectl apply -f hidden/service.yaml
-kubectl apply -f hidden/mongod.yaml
-```
 
 ### slave-delay (replica6)
 cleanup
@@ -194,6 +183,7 @@ kubectl apply -f slave-delay/mongod-pvc.yaml
 kubectl apply -f slave-delay/mongod-logs-pv.yaml
 kubectl apply -f slave-delay/mongod-logs-pvc.yaml
 kubectl apply -f slave-delay/service.yaml
+kubectl apply -f slave-delay/service-node.yaml 
 kubectl apply -f slave-delay/mongod.yaml
 ```
 
