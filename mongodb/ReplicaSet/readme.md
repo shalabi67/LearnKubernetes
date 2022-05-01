@@ -90,11 +90,12 @@ kubectl apply -f replica1/mongod.yaml
 mongo --disableImplicitSessions --port 27017 --eval "db.adminCommand('ping')" 
 
 mongo --host "repl-example/replica1:27017" --username mohammad --password password123 --authenticationDatabase admin
+```
 
-conect from host machine
+connect from host machine
+```
 mongo --host "localhost:27001" --username mohammad --password password123 --authenticationDatabase admin
-mongo --host "repl-example/replica1:27011" --username mohammad --password password123 --authenticationDatabase admin
-
+mongo --host "repl-example/replica1:27001" --username mohammad --password password123 --authenticationDatabase admin
 ```
 
 
@@ -203,7 +204,7 @@ kubectl apply -f slave-delay/mongod.yaml
 
 ## configure replica
 ```
-mongosh
+mongosh --port 27001
 rs.initiate()
 use admin
 db.createUser({
@@ -214,10 +215,10 @@ db.createUser({
     ]
   })
 
-mongosh --host "repl-example/localhost:27017" --username mohammad --password password123 --authenticationDatabase admin
+mongosh --host "repl-example/localhost:27001" --username mohammad --password password123 --authenticationDatabase admin
 rs.status()
-rs.add("replica2:27017")
-rs.add("replica3:27017")
+rs.add("replica2:27002")
+rs.add("replica3:27002")
 rs.isMaster()
 rs.stepDown()
 rs.status()

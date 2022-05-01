@@ -7,6 +7,6 @@ spec:
   ports:
     - name: replica1-port
       nodePort: 27031
-      port: 27017
+      port: 27001
   selector:
     app: replica1

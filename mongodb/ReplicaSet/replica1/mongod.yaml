@@ -24,6 +24,8 @@ spec:
           command:
             - mongo
             - --disableImplicitSessions
+            - --port
+            - "27001"
             - --eval
             - "db.adminCommand('ping')"
         initialDelaySeconds: 30
@@ -36,6 +38,8 @@ spec:
           command:
             - mongo
             - --disableImplicitSessions
+            - --port
+            - "27001"
             - --eval
             - "db.adminCommand('ping')"
         initialDelaySeconds: 30
