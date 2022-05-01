@@ -244,3 +244,111 @@ Add slave-delay
 rs.add( {host: "slave-delay:27017", hidden: true, priority: 0, secondaryDelaySecs:3600, votes: 0 } )
 rs.status()
 ```
+
+## read from secondary
+initialize data
+```
+mongosh --host "repl-example/localhost:27017" --username mohammad --password password123 --authenticationDatabase admin
+use newDB
+db.new_collection.insertOne( { "student": "Matt Javaly", "grade": "A+" } )
+```
+
+read from secondary
+```
+mongosh --host "replica2:27017" --username mohammad --password password123 --authenticationDatabase admin
+use newDB
+rs.slaveOk() or db.getMongo().setReadPref("primaryPreferred")
+db.new_collection.find()
+```
+
+write to secondary should fail
+```
+use newDB
+db.new_collection.insertOne( { "student": "Matt Javaly", "grade": "A+" } )
+```
+
+## oplog
+```
+use local
+show collections
+```
+
+It is cap collection
+```
+var stats = db.oplog.rs.stats()
+stats.capped
+stats.size
+stats.maxSize
+```
+
+show size in GB
+```
+var stats = db.oplog.rs.stats(1024*1024*1024)
+stats.maxSize
+
+df -h
+```
+
+show size in MB
+```
+var stats = db.oplog.rs.stats(1024*1024)
+stats.maxSize
+```
+
+rs.printReplicationInfo()
+```
+rs.printReplicationInfo()
+```
+
+### single command can end up with multiple entries in the oplog
+```
+use demo
+db.createCollection('messages')
+```
+
+Query the oplog, filtering out the heartbeats ("periodic noop") and only returning the latest entry:
+```
+use local
+db.oplog.rs.find( { "o.msg": { $ne: "periodic noop" } } ).sort( { $natural: -1 } ).limit(1).pretty()
+```
+
+Insert 100 different documents:
+```
+use demo
+for ( i=0; i< 100; i++) { db.messages.insert( { 'msg': 'not yet', _id: i } ) }
+db.messages.count()
+```
+
+Query the oplog to find all operations related to demo.messages:
+```
+use local
+db.oplog.rs.find({"ns": "demo.messages"}).sort({$natural: -1})
+```
+
+Illustrate that one update statement may generate many entries in the oplog:
+```
+use demo
+db.messages.updateMany( {}, { $set: { author: 'norberto' } } )
+use local
+db.oplog.rs.find( { "ns": "demo.messages" } ).sort( { $natural: -1 } )
+```
+
+## reconfigure node
+This will configure the slave-delay node to be just hidden
+```
+cfg = rs.conf()
+cfg.members[5].votes = 0
+cfg.members[5].hidden = true
+cfg.members[5].priority = 0
+cfg.members[5].secondaryDelaySecs = 0
+rs.reconfig(cfg)
+rs.conf()
+```
+
+bring the node back to be slave-delay with one hour delay
+```
+cfg = rs.conf()
+cfg.members[5].secondaryDelaySecs = 3600
+rs.reconfig(cfg)
+rs.conf()
+```
