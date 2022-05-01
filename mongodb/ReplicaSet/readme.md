@@ -37,6 +37,13 @@ kubectl apply -f keyFile-configMap.yaml
 ```
 
 ### replica1
+cleanup
+```
+sudo rm -dr Data/Replica1/*.*
+sudo rm -dr Data/Replica1/journal/
+sudo rm -dr Data/Replica1/WiredTiger
+```
+
 ```
 kubectl apply -f replica1/configMap.yaml
 kubectl apply -f replica1/mongod-pv.yaml
@@ -45,10 +52,22 @@ kubectl apply -f replica1/mongod-logs-pv.yaml
 kubectl apply -f replica1/mongod-logs-pvc.yaml
 kubectl apply -f replica1/service.yaml
 kubectl apply -f replica1/mongod.yaml
+
+mongo --disableImplicitSessions --port 27011 --eval "db.adminCommand('ping')" 
+
+mongo --host "repl-example/replica1:27011" --username mohammad --password password123 --authenticationDatabase admin
+
 ```
 
 
 ### replica2
+cleanup
+```
+sudo rm -dr Data/Replica2/*.*
+sudo rm -dr Data/Replica2/journal/
+sudo rm -dr Data/Replica2/WiredTiger
+```
+
 ```
 kubectl apply -f replica2/configMap.yaml
 kubectl apply -f replica2/mongod-pv.yaml
@@ -61,6 +80,13 @@ kubectl apply -f replica2/mongod.yaml
 
 
 ### replica3
+cleanup
+```
+sudo rm -dr Data/Replica3/*.*
+sudo rm -dr Data/Replica3/journal/
+sudo rm -dr Data/Replica3/WiredTiger
+```
+
 ```
 kubectl apply -f replica3/configMap.yaml
 kubectl apply -f replica3/mongod-pv.yaml
@@ -73,7 +99,7 @@ kubectl apply -f replica3/mongod.yaml
 
 ## configure replica
 ```
-mongo --port 27011
+mongosh
 rs.initiate()
 use admin
 db.createUser({
@@ -84,7 +110,7 @@ db.createUser({
     ]
   })
 
-mongo --host "repl-example/localhost:27011" --username mohammad --password password123 --authenticationDatabase admin
+mongosh --host "repl-example/localhost:27017" --username mohammad --password password123 --authenticationDatabase admin
 rs.status()
 rs.add("replica2:27012")
 rs.add("replica3:27013")
