@@ -8,5 +8,5 @@ spec:
     app: hidden
   ports:
     - protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: 27005
+      targetPort: 27005

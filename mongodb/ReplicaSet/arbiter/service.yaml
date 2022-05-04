@@ -8,5 +8,5 @@ spec:
     app: arbiter
   ports:
     - protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: 27004
+      targetPort: 27004

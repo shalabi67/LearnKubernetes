@@ -218,7 +218,7 @@ db.createUser({
 mongosh --host "repl-example/localhost:27001" --username mohammad --password password123 --authenticationDatabase admin
 rs.status()
 rs.add("replica2:27002")
-rs.add("replica3:27002")
+rs.add("replica3:27003")
 rs.isMaster()
 rs.stepDown()
 rs.status()
@@ -233,33 +233,33 @@ db.adminCommand(
     defaultWriteConcern: { w : "majority" },
   }
 )
-rs.add( {host: "arbiter:27017", arbiterOnly: true } )
+rs.add( {host: "arbiter:27004", arbiterOnly: true } )
 rs.status()
 ```
 
 Add hidden
 ```
-rs.add( {host: "hidden:27017", hidden: true, priority: 0 } )
+rs.add( {host: "hidden:27005", hidden: true, priority: 0 } )
 rs.status()
 ```
 
 Add slave-delay
 ```
-rs.add( {host: "slave-delay:27017", hidden: true, priority: 0, secondaryDelaySecs:3600, votes: 0 } )
+rs.add( {host: "slave-delay:27005", hidden: true, priority: 0, secondaryDelaySecs:3600, votes: 0 } )
 rs.status()
 ```
 
 ## read from secondary
 initialize data
 ```
-mongosh --host "repl-example/localhost:27017" --username mohammad --password password123 --authenticationDatabase admin
+mongosh --host "repl-example/localhost:27001" --username mohammad --password password123 --authenticationDatabase admin
 use newDB
 db.new_collection.insertOne( { "student": "Matt Javaly", "grade": "A+" } )
 ```
 
 read from secondary
 ```
-mongosh --host "replica2:27017" --username mohammad --password password123 --authenticationDatabase admin
+mongosh --host "replica2:27002" --username mohammad --password password123 --authenticationDatabase admin
 use newDB
 rs.slaveOk() or db.getMongo().setReadPref("primaryPreferred")
 db.new_collection.find()
@@ -355,4 +355,11 @@ cfg = rs.conf()
 cfg.members[5].secondaryDelaySecs = 3600
 rs.reconfig(cfg)
 rs.conf()
+```
+
+## commands
+```
+db.new_collection.insertOne( { "student": "Matt Javaly", "grade": "A+" } , {writeConcern: {w:3}})
+
+db.new_collection.find().readConcern("majority")
 ```
