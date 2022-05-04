@@ -13,6 +13,7 @@ sudo mv hosts /etc/hosts
 ```
 ## setup kind
 ```
+export KUBECONFIG=~/.kube/kind 
 kind delete cluster
 cd ReplicaSet
 kind create cluster --config kind/kind-config.yaml
