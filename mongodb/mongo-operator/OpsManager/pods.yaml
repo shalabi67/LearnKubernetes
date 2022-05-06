@@ -1,0 +1,51 @@
+# These will force the ops-manage to be installed on a specific node
+apiVersion: v1
+kind: Pod
+metadata:
+  name: no-ops-manage-1
+  labels:
+    no-ops-manager: no-ops-manager1
+    pod-anti-affinity: opsmanager
+spec:
+  containers:
+    - image: busybox
+      name: busybox-1
+      command:
+      - sleep
+      - "3600"
+  nodeSelector:
+    no-ops-manager: no-ops-manager1
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: no-ops-manage-2
+  labels:
+    no-ops-manager: no-ops-manager2
+    pod-anti-affinity: opsmanager
+spec:
+  containers:
+    - image: busybox
+      name: busybox-2
+      command:
+        - sleep
+        - "3600"
+  nodeSelector:
+    no-ops-manager: no-ops-manager2
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: no-ops-manage-3
+  labels:
+    no-ops-manager: no-ops-manager3
+    pod-anti-affinity: opsmanager
+spec:
+  containers:
+    - image: busybox
+      name: busybox-3
+      command:
+        - sleep
+        - "3600"
+  nodeSelector:
+    no-ops-manager: no-ops-manager3

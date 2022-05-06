@@ -1,0 +1,151 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  creationTimestamp: "2022-05-04T09:45:27Z"
+  generation: 1
+  labels:
+    app: opsmanager-svc
+    controller: mongodb-enterprise-operator
+    pod-anti-affinity: opsmanager
+  name: opsmanager
+  namespace: mongodb-operator
+  ownerReferences:
+    - apiVersion: mongodb.com/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MongoDBOpsManager
+      name: opsmanager
+      uid: 4d3c4572-fef7-49b3-85bf-e97a470fea3a
+  resourceVersion: "4088"
+  uid: 0952c7e5-d012-4d5f-b8dd-1e630408650d
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: opsmanager-svc
+      controller: mongodb-enterprise-operator
+      pod-anti-affinity: opsmanager
+  serviceName: opsmanager-svc
+  template:
+    metadata:
+      annotations:
+        connectionStringHash: 2CIUSGTPGMU7RS2TFFJABXOFWC6AZCUMRRW5IDJWPNTHEWM627NQ
+      creationTimestamp: null
+      labels:
+        app: opsmanager-svc
+        controller: mongodb-enterprise-operator
+        pod-anti-affinity: opsmanager
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    pod-anti-affinity: opsmanager
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+      containers:
+        - command:
+            - /opt/scripts/docker-entry-point.sh
+          env:
+            - name: ENABLE_IRP
+              value: "true"
+            - name: OM_PROP_automation_versions_directory
+              value: /mongodb-ops-manager/mongodb-releases/
+            - name: OM_PROP_mms_centralUrl
+              value: http://opsmanager-svc.mongodb-operator.svc.cluster.local:8080
+            - name: OM_PROP_mms_featureControls_enable
+              value: "true"
+            - name: CUSTOM_JAVA_MMS_UI_OPTS
+              value: -Xmx4291m -Xms4291m
+            - name: CUSTOM_JAVA_DAEMON_OPTS
+              value: -Xmx4291m -Xms4291m -DDAEMON.DEBUG.PORT=8090
+          image: quay.io/mongodb/mongodb-enterprise-ops-manager:5.0.0
+          imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - /mongodb-ops-manager/bin/mongodb-mms stop_mms
+          name: mongodb-ops-manager
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /monitor/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            limits:
+              memory: 5G
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 2000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /mongodb-ops-manager/.mongodb-mms
+              name: gen-key
+              readOnly: true
+            - mountPath: /mongodb-ops-manager/.mongodb-mms-connection-string
+              name: mongodb-uri
+              readOnly: true
+            - mountPath: /opt/scripts
+              name: ops-manager-scripts
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      initContainers:
+        - image: quay.io/mongodb/mongodb-enterprise-init-ops-manager:1.0.7
+          imagePullPolicy: IfNotPresent
+          name: mongodb-enterprise-init-ops-manager
+          resources: {}
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 2000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /opt/scripts
+              name: ops-manager-scripts
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 2000
+      serviceAccount: mongodb-enterprise-ops-manager
+      serviceAccountName: mongodb-enterprise-ops-manager
+      terminationGracePeriodSeconds: 300
+      volumes:
+        - emptyDir: {}
+          name: ops-manager-scripts
+        - name: gen-key
+          secret:
+            defaultMode: 416
+            secretName: opsmanager-gen-key
+        - name: mongodb-uri
+          secret:
+            defaultMode: 416
+            secretName: opsmanager-db-connection-string
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+status:
+  collisionCount: 0
+  currentReplicas: 1
+  currentRevision: opsmanager-88b44879f
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updateRevision: opsmanager-88b44879f
+  updatedReplicas: 1

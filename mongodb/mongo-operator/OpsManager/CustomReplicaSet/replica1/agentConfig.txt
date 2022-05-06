@@ -1,0 +1,3 @@
+mmsGroupId=6275193187314236347248ac
+mmsApiKey=6275197a8731423634724947dc48eba9e7ef703a8d2cc7b13c3986ad
+mmsBaseUrl=http://opsmanager-svc.default.svc.cluster.local:8080

@@ -1,0 +1,55 @@
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+nodes:
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: ClusterConfiguration
+        apiServer:
+            extraArgs:
+              service-node-port-range: 2000-32767
+
+
+# ops manager worker
+  - role: worker
+    extraPortMappings:
+#      - containerPort: 8080
+ #       hostPort: 8080
+      - containerPort: 2222
+        hostPort: 22
+        # ops manager port exposed by service opsmanager-svc-ext
+      - containerPort: 31194
+        hostPort: 31194
+        # ops manager backup port
+      - containerPort: 31524
+        hostPort: 31524
+
+  - role: worker
+    extraPortMappings:
+      - containerPort: 27031
+        hostPort: 27001
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/mongo-operator/OpsManager/CustomReplicaSet/Data/Replica1
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/mongo-operator/OpsManager/CustomReplicaSet/Data/Logs1
+        containerPath: /logs
+
+  - role: worker
+    extraPortMappings:
+      - containerPort: 27032
+        hostPort: 27002
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/mongo-operator/OpsManager/CustomReplicaSet/Data/Replica2
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/mongo-operator/OpsManager/CustomReplicaSet/Data/Logs2
+        containerPath: /logs
+
+  - role: worker
+    extraPortMappings:
+      - containerPort: 27033
+        hostPort: 27003
+    extraMounts:
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/mongo-operator/OpsManager/CustomReplicaSet/Data/Replica3
+        containerPath: /data
+      - hostPath: /home/mshalabai/learn/LearnKubernetes/mongodb/mongo-operator/OpsManager/CustomReplicaSet/Data/Logs3
+        containerPath: /logs

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: replica2
+
+spec:
+  selector:
+    app: replica2
+  ports:
+    - protocol: TCP
+      port: 27002
+      targetPort: 27002

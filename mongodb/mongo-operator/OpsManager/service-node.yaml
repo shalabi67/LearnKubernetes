@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ops-manager
+spec:
+  type: NodePort
+  ports:
+    - name: ops-manager-port
+      nodePort: 31194
+      port: 8080
+  selector:
+    app: opsmanager-svc
