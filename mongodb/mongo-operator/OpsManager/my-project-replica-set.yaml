@@ -7,15 +7,15 @@ data:
   baseUrl: http://opsmanager-svc.default.svc.cluster.local:8080
   # Optional Parameters
   # projectName: My Ops/Cloud Manager Project
-  orgId: 6273c9c80c132e36c0de0985
+  orgId: 62750b418731423634722639
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: organization-secret
 stringData:
-  user: uyeqdbil
-  publicApiKey: caa29e7f-ccea-44c0-b959-5fb04dc88014
+  user: xbhajlyn
+  publicApiKey: 15b02718-43d5-4bcd-bdb7-8dacd6f6b967
 ---
 apiVersion: mongodb.com/v1
 kind: MongoDB
