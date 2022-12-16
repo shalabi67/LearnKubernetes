@@ -30,7 +30,7 @@ spec:
       command:
         - sh
         - -c
-        - "/opt/mongodb-mms-automation/bin/mongodb-mms-automation-agent -f /etc/mongodb-mms/automation-agent.config"
+        - "echo \"$(hostname -i)    replica1.replica1-svc.default.svc.cluster.local   replica1\" >> /etc/hosts && /opt/mongodb-mms-automation/bin/mongodb-mms-automation-agent -f /etc/mongodb-mms/automation-agent.config"
       volumeMounts:
         - name: "mongo-data-dir"
           mountPath: "/data"
@@ -39,6 +39,8 @@ spec:
           readOnly: false
         - name: opt
           mountPath: "/opt"
+        - name: etc
+          mountPath: "/etc"
 
     - image: mongo
       name: mongo
@@ -102,6 +104,8 @@ spec:
     replica: replica1
   volumes:
     - name: opt
+      emptyDir: { }
+    - name: etc
       emptyDir: { }
     - name: "mongo-data-dir"
       persistentVolumeClaim:
