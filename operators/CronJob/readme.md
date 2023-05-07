@@ -2,6 +2,7 @@
 This is a tutorial taken from [CronJob tutorial](https://book.kubebuilder.io/cronjob-tutorial/cronjob-tutorial.html).
 This main changed is using operator-sdk framework.
 
+## copy from machine to docker
 docker cp ./ operator-sdk:/cronjob
 
 ## Step 1: create project
@@ -24,6 +25,6 @@ docker cp ./ operator-sdk:/cronjob
 ## step 4: update controller
 - nano 
 
-## step 5: generate webhocks validation
+## step 5: generate webhooks validation
 - operator-sdk create webhook  --group batch --version v1alpha1 --kind CronJob --defaulting --programmatic-validation
 
