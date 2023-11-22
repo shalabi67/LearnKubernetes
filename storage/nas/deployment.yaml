@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-example
+  labels:
+    app: blog-example
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blog-example
+  template:
+    metadata:
+      labels:
+        app: blog-example
+    spec:
+      containers:
+        - name: blog-example
+          image: busybox
+          command: ["/bin/sh", "-c", "while true; do ls /mnt/blog-example; sleep 10;done"]
+          volumeMounts:
+            - mountPath: "/mnt/blog-example"
+              name: blog-example
+      volumes:
+        - name: blog-example
+          persistentVolumeClaim:
+            claimName: example
