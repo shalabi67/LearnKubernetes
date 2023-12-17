@@ -1,0 +1,58 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - learn.shalabi.com
+  resources:
+  - databases
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - learn.shalabi.com
+  resources:
+  - databases/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - learn.shalabi.com
+  resources:
+  - databases/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - learn.shalabi.com
+  resources:
+  - servers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - learn.shalabi.com
+  resources:
+  - servers/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - learn.shalabi.com
+  resources:
+  - servers/status
+  verbs:
+  - get
+  - patch
+  - update

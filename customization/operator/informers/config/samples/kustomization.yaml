@@ -1,0 +1,5 @@
+## Append samples of your project ##
+resources:
+- learn_v1_database.yaml
+- learn_v1_server.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

@@ -1,0 +1,17 @@
+apiVersion: learn.shalabi.com/v1
+kind: Database
+metadata:
+  labels:
+    app.kubernetes.io/name: database
+    app.kubernetes.io/instance: database-sample
+    app.kubernetes.io/part-of: informers
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: informers
+  name: first
+spec:
+  description: "This is my first database"
+  replicas: 3
+  cpu: 4
+  memory: 7
+  storage: 100
+
