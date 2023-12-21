@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+user -> controller: processNextWorkItem
+activate controller #FFBBBB
+controller --> workQueueType: Get
+controller --> controller: reconcileHandler
+activate controller #DarkSalmon
+controller --> rateLimitingType: AddRateLimited
+activate rateLimitingType
+activate delayingType
+rateLimitingType --> delayingType: AddAfter
+delayingType --> workQueueType: Add
+deactivate delayingType
+deactivate rateLimitingType
+deactivate controller
+controller --> workQueueType: Done
+
+@enduml

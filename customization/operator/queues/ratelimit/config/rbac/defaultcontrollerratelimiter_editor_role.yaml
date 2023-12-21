@@ -1,0 +1,31 @@
+# permissions for end users to edit defaultcontrollerratelimiters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: defaultcontrollerratelimiter-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: ratelimit
+    app.kubernetes.io/part-of: ratelimit
+    app.kubernetes.io/managed-by: kustomize
+  name: defaultcontrollerratelimiter-editor-role
+rules:
+- apiGroups:
+  - ratelimit.shalabi.com
+  resources:
+  - defaultcontrollerratelimiters
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ratelimit.shalabi.com
+  resources:
+  - defaultcontrollerratelimiters/status
+  verbs:
+  - get
